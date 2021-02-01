@@ -35,21 +35,24 @@ main{
 }
 
 main > section{
+    margin-top: 50px;
+    padding-top: 20px;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-around;
-    min-height: 500px;
     width: 80%;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 15px;
 }
 
 main > section > div.colonne{
+    margin-bottom: 20px;
     width: 90%;
 }
 
 main > section > div{
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -60,7 +63,6 @@ main > section > div{
 }
 
 main > section > div > article{
-    margin: 10px 0;
     text-align: center;
     width: 150px;
     padding: 5px 10px;

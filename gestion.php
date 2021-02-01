@@ -54,7 +54,7 @@
             }
 
             if(isset($_POST['submit'])){
-                if(!empty($_POST['date_change']) && !empty($_POST['floor']) && !empty($_POST['position']) && !empty($_POST['price'])){
+                if(!empty($_POST['date_change']) && !empty($_POST['price'])){
                     $date_change= htmlspecialchars($_POST['date_change']);
                     $floor= htmlspecialchars($_POST['floor']);
                     $position= htmlspecialchars($_POST['position']);

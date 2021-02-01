@@ -57,7 +57,7 @@
 
                     echo '<div><article> '.$date_change.'</article>
                                <article>Etage n°'.$floor.'</article>
-                               <article> '.$position.'</article>
+                               <article>Côté '.$position.'</article>
                                <article> '.$price.' €</article>
                         </div>';
                 }   
