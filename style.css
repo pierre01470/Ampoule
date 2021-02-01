@@ -1,0 +1,81 @@
+html, body, ul{
+    margin: 0;
+    padding: 0;
+}
+
+
+/* --------------------HEADER-------------------- */
+header{
+    height: 50px;
+    background: linear-gradient(to right, #414345, #232526);
+}
+
+header > div > ul{
+    display: flex;
+    justify-content: space-around;
+    line-height: 50px;
+    font-size: 2rem;
+    list-style: none;
+}
+
+header > div > ul > li > a{
+    color: white;
+    text-decoration: none;
+}
+
+
+/* --------------------MAIN------------------- */
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 600px;
+    background: linear-gradient(to right, #F7BB97, #DD5E89);
+}
+
+main > section{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 500px;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+}
+
+main > section > div.colonne{
+    width: 90%;
+}
+
+main > section > div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    width: 80%;
+    background: linear-gradient(to right, #414345, #232526);
+    border-radius: 15px;
+}
+
+main > section > div > article{
+    margin: 10px 0;
+    text-align: center;
+    width: 150px;
+    padding: 5px 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+/* ----------FORM--------- */
+
+main > form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+}
