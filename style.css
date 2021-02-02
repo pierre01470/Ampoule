@@ -25,7 +25,6 @@ header > div > ul > li > a{
 
 
 /* --------------------MAIN------------------- */
-
 main{
     display: flex;
     justify-content: center;
@@ -70,9 +69,8 @@ main > section > div > article{
 }
 
 
-/* ----------FORM--------- */
-
-main > form{
+/* ----------FORMULAIRE--------- */
+div.form{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,4 +78,24 @@ main > form{
     width: 80%;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 15px;
+}
+
+main > div > form{
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    width: 80%;
+    background: linear-gradient(to right, #414345, #232526);
+    border-radius: 15px;
+}
+
+
+/* ----------EDIT BUTTON--------- */
+.image{
+    background-color: rgba(255, 255, 255, 0.8);
+    color: white;
+    width: 23px;
+    padding: 2px;
 }

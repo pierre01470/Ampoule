@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+
+    <!-------------------- HEADER -------------------->
     <header>
         <div>
             <ul>
@@ -18,37 +20,38 @@
 
     <!-------------------- FORMULAIRE -------------------->
     <main>
-        <form action="" method="post">
-            <input type="date" name="date_change">
-            <select name="floor" id=""> 
-                <option value="0">Rez-de-chaussée</option>
-                <option value="1">Etage 1</option>
-                <option value="2">Etage 2</option>
-                <option value="3">Etage 3</option>
-                <option value="4">Etage 4</option>
-                <option value="5">Etage 5</option>
-                <option value="6">Etage 6</option>
-                <option value="7">Etage 7</option>
-                <option value="8">Etage 8</option>
-                <option value="9">Etage 9</option>
-                <option value="10">Etage 10</option>
-                <option value="11">Etage 11</option>
-            </select>
-            <select name="position" id="">
-                <option value="gauche">Côté gauche</option>
-                <option value="droit">Côté droit</option>
-                <option value="Fond">Fond</option>
+        <div class="form">
+            <form action="" method="post">
+                <input type="date" name="date_change">
+                <select name="floor" id=""> 
+                    <option value="0">Rez-de-chaussée</option>
+                    <option value="1">Etage 1</option>
+                    <option value="2">Etage 2</option>
+                    <option value="3">Etage 3</option>
+                    <option value="4">Etage 4</option>
+                    <option value="5">Etage 5</option>
+                    <option value="6">Etage 6</option>
+                    <option value="7">Etage 7</option>
+                    <option value="8">Etage 8</option>
+                    <option value="9">Etage 9</option>
+                    <option value="10">Etage 10</option>
+                    <option value="11">Etage 11</option>
+                </select>
+                <select name="position" id="">
+                    <option value="gauche">Côté gauche</option>
+                    <option value="droit">Côté droit</option>
+                    <option value="Fond">Fond</option>
 
-            </select>
-            <input type="text" name="price">€
-            <input type="submit" value="Ajouter" name="submit">
-        </form>
+                </select>
+                <input type="text" name="price" placeholder="Prix">€
+                <input type="submit" value="Ajouter" name="submit">
+            </form>
+        </div>
         
-        <!-------------------- PHP -------------------->
+    <!-------------------- PHP -------------------->
         <?php
-            try{
-                $bdd = new PDO('mysql:host=localhost;dbname=ampoule','root');
-            }
+            try{$bdd = new PDO('mysql:host=localhost;dbname=ampoule','root');}
+
             catch(PDOException $e){
                 echo 'Echec de la connexion : ' .$e->getMessage();
             }
@@ -71,6 +74,9 @@
                 else{
                     echo 'remplissez tous les champs!';
                 }
+            }
+            if($_GET){
+                echo $_GET['edit'];
             }
         ?>
     </main>

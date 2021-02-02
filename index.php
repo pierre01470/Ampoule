@@ -7,22 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-        try{
-            $bdd = new PDO('mysql:host=localhost;dbname=ampoule','root');
-        }
-        catch(PDOException $e){
-            echo 'Echec de la connexion : ' .$e->getMessage();
-        }
 
-        $table = $bdd->query('SELECT date_change, floor, position, price FROM gestion');
-        foreach ($table as $donnee){
-            $date_change= $donnee['date_change'];
-            $floor= $donnee['floor'];
-            $position= $donnee['position'];
-            $price= $donnee['price'];
-        }        
-    ?>
+    <!-------------------- HEADER -------------------->
     <header>
         <div>
             <ul>
@@ -32,6 +18,7 @@
         </div>
     </header>
     
+    <!-------------------- MAIN -------------------->
     <main>
         <section>
             <div class="colonne">
@@ -40,16 +27,18 @@
                 <article>Position</article>
                 <article>Prix</article>
             </div>
+
+    <!-------------------- PHP -------------------->
             <?php
-                try{
-                    $bdd = new PDO('mysql:host=localhost;dbname=ampoule','root');
-                }
+                try{$bdd = new PDO('mysql:host=localhost;dbname=ampoule','root');}
+                
                 catch(PDOException $e){
                     echo 'Echec de la connexion : ' .$e->getMessage();
                 }
 
-                $table = $bdd->query('SELECT date_change, floor, position, price FROM gestion');
-                foreach ($table as $donnee){
+                $table = $bdd->query('SELECT id_gestion, date_change, floor, position, price FROM gestion');
+                foreach($table as $donnee){
+                    $id_gestion= $donnee['id_gestion'];
                     $date_change= $donnee['date_change'];
                     $floor= $donnee['floor'];
                     $position= $donnee['position'];
@@ -58,9 +47,13 @@
                     echo '<div><article> '.$date_change.'</article>
                                <article>Etage n°'.$floor.'</article>
                                <article>Côté '.$position.'</article>
-                               <article> '.$price.' €</article>
-                        </div>';
-                }   
+                               <article> '.$price.'€</article>
+                                <form action="http://localhost/Ampoule/gestion.php" method="get">
+                                    <input type="image" name="edit" class="image" src="../Ampoule/edit.svg">
+                                    <input type="image" name="trash" class="image" src="../Ampoule/poubelle.svg">
+                                </form>
+                          </div>';
+                }
             ?>
         </section>
     </main>
