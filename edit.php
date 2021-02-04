@@ -17,13 +17,15 @@
             </ul>
         </div>
     </header>
-
-    <!-------------------- FORMULAIRE -------------------->
+    
+    
+    <!-------------------- FORM -------------------->
     <main>
         <div class="form">
             <form action="" method="post">
                 <input type="date" name="date_change">
                 <select name="floor" id=""> 
+                    <option value="<? echo $_GET['floor'];?>" selected></option>
                     <option value="0">Rez-de-chaussée</option>
                     <option value="1">Etage 1</option>
                     <option value="2">Etage 2</option>
@@ -41,38 +43,32 @@
                     <option value="gauche">Côté gauche</option>
                     <option value="droit">Côté droit</option>
                     <option value="Fond">Fond</option>
+
                 </select>
                 <input type="text" name="price" placeholder="Prix">€
-                <input type="submit" value="Ajouter" name="submit">
+                <input type="submit" value="Modifier" name="submit">
             </form>
         </div>
-        
     <!-------------------- PHP -------------------->
         <?php
-            try{$bdd = new PDO('mysql:host=localhost;dbname=ampoule','root');
-            }
+            try{$bdd = new PDO('mysql:host=localhost;dbname=ampoule','root');}
+
             catch(PDOException $e){
                 echo 'Echec de la connexion : ' .$e->getMessage();
             }
-
-            if(isset($_POST['submit'])){
-                if(!empty($_POST['date_change']) && !empty($_POST['price'])){
-                    $date_change= htmlspecialchars($_POST['date_change']);
-                    $floor= htmlspecialchars($_POST['floor']);
-                    $position= htmlspecialchars($_POST['position']);
-                    $price= htmlspecialchars($_POST['price']);
-
-                    $insert= $bdd->prepare("INSERT INTO `gestion` (`date_change`, `floor`, `position`, `price`)
-                                            VALUES (:date_change, :floor, :position, :price)");
-                    $insert->bindParam(':date_change', $date_change);
-                    $insert->bindParam(':floor', $floor);
-                    $insert->bindParam(':position', $position);
-                    $insert->bindParam(':price', $price);
-                    $insert->execute();
+            if(isset($_POST['submit']) && !empty($_GET['id_gestion'])){
+                try{
+                    $edit = $bdd->prepare('UPDATE `gestion` SET `date_change`=:date_change, `floor`=:floor, `position`=:position, `price`=:price WHERE `gestion`.`id_gestion` = '.$_GET['id_gestion'].'');  
+                    $edit->bindParam(':date_change',$_POST['date_change']);
+                    $edit->bindParam(':floor',$_POST['floor']);
+                    $edit->bindParam(':position',$_POST['position']);
+                    $edit->bindParam(':price',$_POST['price']);
+                    $edit->execute();
+                } catch (PDOException $e) {
+                    echo 'Echec query : ' . $e->getMessage();
                 }
-                else{
-                    echo 'remplissez tous les champs!';
-                }
+                header("Location: index.php");
+            
             }
         ?>
     </main>

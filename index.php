@@ -30,8 +30,8 @@
 
     <!-------------------- PHP -------------------->
             <?php
-                try{$bdd = new PDO('mysql:host=localhost;dbname=ampoule','root');}
-                
+                try{$bdd = new PDO('mysql:host=localhost;dbname=ampoule','root');
+                }
                 catch(PDOException $e){
                     echo 'Echec de la connexion : ' .$e->getMessage();
                 }
@@ -48,15 +48,12 @@
                                <article>Etage n°'.$floor.'</article>
                                <article>Côté '.$position.'</article>
                                <article> '.$price.'€</article>
-                                <form action="http://localhost/Ampoule/gestion.php" method="get">
-                                    <input type="image" name="edit" class="image" src="../Ampoule/edit.svg">
-                                    <input type="image" name="trash" class="image" src="../Ampoule/poubelle.svg">
-                                </form>
+                                    <a href="http://localhost/Ampoule/edit.php?id_gestion='.$id_gestion.'&floor='.$floor.'"><img src="../Ampoule/edit.svg" alt="" class="image"></a>
+                                    <a href="http://localhost/Ampoule/delete.php?id_gestion='.$id_gestion.'"><img src="../Ampoule/poubelle.svg" alt="" class="image"></a>
                           </div>';
                 }
             ?>
         </section>
     </main>
-    
 </body>
 </html>
