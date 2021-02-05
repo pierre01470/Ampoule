@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gestion</title>
 </head>
+
 <body>
 
     <!-------------------- HEADER -------------------->
@@ -23,7 +25,7 @@
         <div class="form">
             <form action="" method="post">
                 <input type="date" name="date_change">
-                <select name="floor" id=""> 
+                <select name="floor" id="">
                     <option value="0">Rez-de-chaussée</option>
                     <option value="1">Etage 1</option>
                     <option value="2">Etage 2</option>
@@ -46,36 +48,36 @@
                 <input type="submit" value="Ajouter" name="submit">
             </form>
         </div>
-        
-    <!-------------------- PHP -------------------->
+
+        <!-------------------- PHP QUERY INSERT-------------------->
         <?php
-            try{$bdd = new PDO('mysql:host=localhost;dbname=ampoule','root');
-            }
-            catch(PDOException $e){
-                echo 'Echec de la connexion : ' .$e->getMessage();
-            }
+        try {
+            $bdd = new PDO('mysql:host=localhost;dbname=ampoule', 'root');
+        } catch (PDOException $e) {
+            echo 'Echec de la connexion : ' . $e->getMessage();
+        }
 
-            if(isset($_POST['submit'])){
-                if(!empty($_POST['date_change']) && !empty($_POST['price'])){
-                    $date_change= htmlspecialchars($_POST['date_change']);
-                    $floor= htmlspecialchars($_POST['floor']);
-                    $position= htmlspecialchars($_POST['position']);
-                    $price= htmlspecialchars($_POST['price']);
+        if (isset($_POST['submit'])) {
+            if (!empty($_POST['date_change']) && !empty($_POST['price'])) {
+                $date_change = htmlspecialchars($_POST['date_change']);
+                $floor = htmlspecialchars($_POST['floor']);
+                $position = htmlspecialchars($_POST['position']);
+                $price = htmlspecialchars($_POST['price']);
 
-                    $insert= $bdd->prepare("INSERT INTO `gestion` (`date_change`, `floor`, `position`, `price`)
+                $insert = $bdd->prepare("INSERT INTO `gestion` (`date_change`, `floor`, `position`, `price`)
                                             VALUES (:date_change, :floor, :position, :price)");
-                    $insert->bindParam(':date_change', $date_change);
-                    $insert->bindParam(':floor', $floor);
-                    $insert->bindParam(':position', $position);
-                    $insert->bindParam(':price', $price);
-                    $insert->execute();
-                }
-                else{
-                    echo 'remplissez tous les champs!';
-                }
+                $insert->bindParam(':date_change', $date_change);
+                $insert->bindParam(':floor', $floor);
+                $insert->bindParam(':position', $position);
+                $insert->bindParam(':price', $price);
+                $insert->execute();
+            } else {
+                echo 'remplissez tous les champs!';
             }
+        }
         ?>
     </main>
-    
+
 </body>
+
 </html>

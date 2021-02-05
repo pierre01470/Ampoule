@@ -99,3 +99,9 @@ main > div > form{
     width: 23px;
     padding: 2px;
 }
+
+/* PAGINATION */
+.pagination > a{
+    list-style: none;
+    color: white;
+}
