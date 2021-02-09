@@ -1,3 +1,14 @@
+<?php
+// On prolonge la session
+session_start();
+// On teste si la variable de session existe et contient une valeur
+if(empty($_SESSION['username'])) 
+{
+  // Si inexistante ou nulle, on redirige vers le formulaire de login
+  header('Location: index.php');
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,9 +26,10 @@
     <header>
         <div>
             <ul>
-                <li><a href="http://localhost/Ampoule/index.php">Historique</a></li>
-                <li><a href="http://localhost/Ampoule/gestion.php">Gestion</a></li>
+                <li><a href="historic.php">Historique</a></li>
+                <li><a href="gestion.php">Gestion</a></li>
             </ul>
+            <a href="index.php?logout=true" class="logout"><img src="../Ampoule/media/off.png" alt=""></a>
         </div>
     </header>
 
@@ -25,7 +37,7 @@
     <!-------------------- FORM -------------------->
     <main>
         <div class="form">
-            <form action="" method="post">
+            <form class="formresp" action="" method="post">
                 <input type="date" name="date_change" value="<?=htmlspecialchars($_GET['date_change']);?>">
                 <select name="floor" id="">
                     <option value="" selected><?='Etage n° '.htmlspecialchars($_GET['floor']);?></option>
@@ -72,7 +84,7 @@
             } catch (PDOException $e) {
                 echo 'Echec query : ' . $e->getMessage();
             }
-            header("Location: index.php");
+            header("Location: historic.php");
         }
         ?>
     </main>

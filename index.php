@@ -1,71 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+  <?php
+  define('LOGIN', 'admin');
+  define('PASSWORD', 'admin');
+  if (isset($_GET['logout'])){
+    session_start();
+    session_destroy();
+    header("Location: index.php");
+  }
+  elseif (!empty($_POST['username']) && !empty($_POST['password'])) {
+    // Sont-ils les mêmes que les constantes ?
+    if ($_POST['username'] !== LOGIN) {
+      $errorMessage = 'Mauvais login !';
+      echo $errorMessage;
+    } elseif ($_POST['password'] !== PASSWORD) {
+      $errorMessage = 'Mauvais password !';
+      echo $errorMessage;
+    } else {
+      // On ouvre la session
+      session_start();
+      // On enregistre le login en session
+      $_SESSION['username'] = LOGIN;
+      // On redirige vers le fichier admin.php
+      header("Location: historic.php");
+    }
+  } else {
+    $errorMessage = 'Veuillez inscrire vos identifiants svp !';
+  }
 
-<head>
-    <link rel="stylesheet" href="style.css">
+  ?>
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <link rel="stylesheet" href="style_connect.css">
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historique</title>
-</head>
+    <title>Document</title>
+  </head>
 
-<body>
+  <body>
+    <div class="login">
+      <h1>Login</h1>
+      <form action="" method="post">
+        <input type="text" name="username" placeholder="Username" required="required" />
+        <input type="password" name="password" placeholder="Password" required="required" />
+        <button type="submit" name="submit" class="btn btn-primary btn-block btn-large">S'identifier</button>
+      </form>
+    </div>
+  </body>
 
-
-    <!-------------------- HEADER -------------------->
-    <header>
-        <div>
-            <ul>
-                <li><a href="http://localhost/Ampoule/index.php">Historique</a></li>
-                <li><a href="http://localhost/Ampoule/gestion.php">Gestion</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <!-------------------- MAIN -------------------->
-    <main>
-        <section>
-            <div class="colonne">
-                <article>Date de changement</article>
-                <article>Etage</article>
-                <article>Position</article>
-                <article>Prix</article>
-            </div>
-
-            <!-------------------- PHP SELECT QUERY -------------------->
-            <?php
-            try {
-                $bdd = new PDO('mysql:host=localhost;dbname=ampoule', 'root');
-            } catch (PDOException $e) {
-                echo 'Echec de la connexion : ' . $e->getMessage();
-            }
-            $table = $bdd->query('SELECT * FROM gestion ORDER BY date_change LIMIT 0,5');
-            foreach ($table as $donnee) {
-                $id_gestion = htmlspecialchars($donnee['id_gestion']);
-                $date_change = htmlspecialchars($donnee['date_change']);
-                $floor = htmlspecialchars($donnee['floor']);
-                $position = htmlspecialchars($donnee['position']);
-                $price = htmlspecialchars($donnee['price']);
-
-                echo '<div><article> ' . $date_change . '</article>
-                               <article>Etage n°' . $floor . '</article>
-                               <article>Côté ' . $position . '</article>
-                               <article> ' . $price . '€</article>
-                                    <a href="http://localhost/Ampoule/edit.php?id_gestion=' . $id_gestion . '&date_change=' . $date_change . '&floor=' . $floor . '&position=' . $position . '&price=' . $price . '"><img src="../Ampoule/edit.svg" alt="" class="image"></a>
-                                    <a href="http://localhost/Ampoule/delete.php?id_gestion=' . $id_gestion . '" onclick="return confirm(\'Etes-vous sûr de vouloir supprimer cette entrée ?\');"><img src="../Ampoule/poubelle.svg" alt="" class="image"></a>
-                          </div>';
-            }
-            ?>
-            <div class="pagination">
-                <a href="#"><< Previous</a>
-                <a href="#" title="Algorithm">1</a>
-                <a href="#" title="DataStructure">2</a>
-                <a href="#" title="Languages">3</a>
-                <a href="#" title="Interview" class="active">4</a>
-                <a href="#" title="practice">5</a>
-                <a href="#">Next >></a>
-            </div>
-        </section>
-    </main>
-</body>
-
-</html>
+  </html>
